@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+A agregar: 
+- OOO también {next:{revalidate:60}}, que se encarga de refrescar la pagina cada 60 segujndos, por ejemplo, para incluir nuevos articulos o lo q sea. incremental static regeneration
 
-## Getting Started
 
-First, run the development server:
+# Elementos a destacar
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Lógica
+### Fetching
+En react 12, había diferentes funciones para fetching de datos
+*De la doc oficial de Next 13*
+This request should be cached until manually invalidated.
+Similar to `getStaticProps`.
+ `force-cache` is the default and can be omitted.
+fetch(URL, { cache: 'force-cache' });
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This request should be refetched on every request.
+Similar to `getServerSideProps`.
+fetch(URL, { cache: 'no-store' });
+//En la build, este fetch no se vuelve "permanente"
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+This request should be cached with a lifetime of 10 seconds.
+Similar to `getStaticProps` with the `revalidate` option.
+// o similar a ISR(incrementalStaticRegeneration)
+fetch(URL, { next: { revalidate: 10 } });
+//cada 10 segundos hace un nuevo fetch que actualiza la página
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Server-side components y estructura granular
+Para que vaya más rápido, los componentes se dividen en Server y Client. Los server DEBEN ser la mayoría; implican las views, fetching de datos, etc. Los Client se implementan cuando se espera interacción con el usuario. Deben ser lo más esenciales posibles, y lo más pequeños y alejados del tronco principal. 'client side'
+Debemos desestructurar TODO en componentes. Lo más que podamos y tenga lógica.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Layout 
+Ademas de contener todos los componentes y poder usar un header inmutabler, se puede usar como state manager, reemplazo de redux .ej. Recibe ({children})
 
-## Learn More
+### Loading (y suspense)
+Podemos implementar, para cada ruta (page.tsx), un loading.tsx, con un placheolder dentro. Esto automatiza tener que usar ternarias dentro del return Y profundiza la lógixa granular de separar cada función en componentes pequeños 
+Para los componentes que no cargaron, compatible cn async,await Se usa un fallback con un componente como loading screen
 
-To learn more about Next.js, take a look at the following resources:
+### Image
+a
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Fonts

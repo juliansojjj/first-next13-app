@@ -1,0 +1,28 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(4,20em);
+    width: 100%;
+    justify-items: center;
+}
+
+.containerFlex{
+    display: flex;
+    flex-direction: column;
+}
+
+.containerSon{
+    border: 1px solid black;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    width: 15em;
+    padding: 1em;
+}
+
+.containerLoadingSon{
+    background:linear-gradient(#cecece,#757575) ;
+    border-radius: 1em;
+    width: 15em;
+    height: 12em;
+    margin-top: 1em;
+    filter: opacity(25%);
+}
