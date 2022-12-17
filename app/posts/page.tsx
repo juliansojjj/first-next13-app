@@ -1,5 +1,9 @@
 import styles from './posts.module.css'
 import Link from 'next/link'
+import {Roboto} from '@next/font/google'
+
+
+const roboto = Roboto({weight:'400'})
 
 export type Post = {
     userId:Number;
@@ -23,7 +27,7 @@ export default async function Posts(){
             <p>Esta NO es una url dinámica, sin embargo, podés acceder a esa función clickeando los diferentes posts</p>
             <div className={styles.container}>
             {repository.map((item,i)=>{return(
-                <Link href={`posts/${item.id}`} key={i} className={styles.containerSon}>
+                <Link href={`posts/${item.id}`} key={i} className={`${styles.containerSon} ${roboto.className}`}>
                 {item.title}
                 </Link>
             )})}

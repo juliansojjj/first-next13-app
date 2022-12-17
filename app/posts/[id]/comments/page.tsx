@@ -1,3 +1,9 @@
+import localfont from '@next/font/local'
+import Image from 'next/image'
+import Foto from './egreso.jpg'
+
+const font = localfont({src:'./GaramondPremrPro.otf'})
+
 type Params = {
     params:{id:string|number}
 }
@@ -23,10 +29,15 @@ export default async function Comments({params}:Params) {
 
     return (<>
         {repository 
-            ?   repository.map(item=>{
-                return(<div>
-                <h3>{item.email}</h3>
-                <p>{item.body}</p>
+            ?   repository.map((item,i)=>{
+                return(
+                <div className={font.className} key={i}>
+                    {/*debería mostrar garamnod pero toma roboto de los posts(?*/}
+                    <Image src={Foto} alt='Random photo' width={50} height={50}/>
+                    {/*me funka con imagen local, con imagen de url NO, para nada, pero en teoria la config de next esta BIEN*/}
+                    <Image src="https://picsum.photos/200/200" alt='Random photo' width={50} height={50}/>
+                    <h3>{item.email}</h3>
+                    <p>{item.body}</p>
                 </div>) 
                 })
             : ''}

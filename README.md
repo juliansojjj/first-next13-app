@@ -36,6 +36,10 @@ Podemos implementar, para cada ruta (page.tsx), un loading.tsx, con un placheold
 Para los componentes que no cargaron, compatible cn async,await Se usa un fallback con un componente como loading screen
 
 ### Image
-a
+Para usar imagenes locales es lo mismo q react, tenés q importarla
 
 ### Fonts
+Te deja usar fonts de google y locales de modo mas rapido
+
+# Post-mortem
+No anda nada. Todo está medio roto. Sobre todo con problemas de render y refrescar página. Por supuesto que es por estar en alpha, pero hay cosas puntuales como usar varios layouts, o mezclarlos (con grupos x ej) entre urls que rompe todo
