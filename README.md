@@ -1,7 +1,3 @@
-A agregar: 
-- OOO también {next:{revalidate:60}}, que se encarga de refrescar la pagina cada 60 segujndos, por ejemplo, para incluir nuevos articulos o lo q sea. incremental static regeneration
-
-
 # Elementos a destacar
 
 ## Lógica
